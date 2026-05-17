@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mb-red: #d8232a;
+  --color-mb-gray: #f5f5f5;
+  --color-mb-text: #303030;
+  --color-mb-light-text: #666666;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-mb-gray);
+    color: var(--color-mb-text);
+    font-family: sans-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded font-medium transition-colors cursor-pointer text-center inline-block;
+  }
+  .btn-primary {
+    @apply bg-mb-red text-white hover:bg-red-700;
+  }
+  .btn-outline {
+    @apply border border-gray-300 text-mb-text hover:bg-gray-50 bg-white;
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "rentsphere",
+  "version": "1.0.0",
+  "description": "Smart Rental Discovery Platform",
+  "scripts": {
+    "server": "cd server && npx nodemon index.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "cd server && node seeder.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
