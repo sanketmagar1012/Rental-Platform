@@ -66,7 +66,7 @@ export const getDefaultFormState = (propertyType = 'flat') => ({
   propertyType,
   rent: '',
   deposit: '',
-  city: '',
+  city: 'Pune',
   address: '',
   bhk: '1BHK',
   furnishing: 'Unfurnished',

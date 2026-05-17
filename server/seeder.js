@@ -17,10 +17,10 @@ const importData = async () => {
     const hashedPassword = await bcrypt.hash('123456', salt);
 
     const createdUsers = await User.insertMany([
-      { name: 'Rahul Sharma', email: 'rahul@example.com', password: hashedPassword, googleId: 'g1', role: 'owner', profileCompleted: true, phoneNumber: '9876543210', city: 'Pune' },
-      { name: 'Priya Patel', email: 'priya@example.com', password: hashedPassword, googleId: 'g2', role: 'owner', profileCompleted: true, phoneNumber: '9876543211', city: 'Mumbai' },
-      { name: 'Empty Owner Demo', email: 'empty@example.com', password: hashedPassword, googleId: 'g3', role: 'owner', profileCompleted: true, phoneNumber: '9876543212', city: 'Delhi' },
-      { name: 'Tenant Demo', email: 'tenant@example.com', password: hashedPassword, googleId: 'g4', role: 'user', profileCompleted: true, phoneNumber: '9876543213', city: 'Pune' }
+      { name: 'Rahul Sharma', email: 'rahul@example.com', password: hashedPassword, googleId: 'g1', role: 'owner', profileCompleted: true, phoneNumber: '9881234567', city: 'Pune' },
+      { name: 'Priya Patel', email: 'priya@example.com', password: hashedPassword, googleId: 'g2', role: 'owner', profileCompleted: true, phoneNumber: '8805671234', city: 'Mumbai' },
+      { name: 'Amit Patel', email: 'amit.patel@gmail.com', password: hashedPassword, googleId: 'g3', role: 'owner', profileCompleted: true, phoneNumber: '7709876543', city: 'Pune' },
+      { name: 'Tenant Demo', email: 'tenant@example.com', password: hashedPassword, googleId: 'g4', role: 'user', profileCompleted: true, phoneNumber: '9011223344', city: 'Pune' }
     ]);
 
     const owner1 = createdUsers[0]._id;

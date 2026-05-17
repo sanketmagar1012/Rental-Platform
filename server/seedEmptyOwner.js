@@ -1,5 +1,5 @@
 /**
- * Seeds diverse test properties for empty@example.com
+ * Seeds diverse test properties for amit.patel@gmail.com
  * Run: node seedEmptyOwner.js
  */
 const mongoose = require('mongoose');
@@ -10,7 +10,7 @@ const connectDB = require('./config/db');
 
 dotenv.config();
 
-const EMPTY_EMAIL = 'empty@example.com';
+const EMPTY_EMAIL = 'amit.patel@gmail.com';
 
 // Pune-area coordinates [longitude, latitude] for nearby-search testing
 const LOC = {
@@ -504,13 +504,13 @@ const seed = async () => {
       const bcrypt = require('bcryptjs');
       const hashedPassword = await bcrypt.hash('123456', await bcrypt.genSalt(10));
       owner = await User.create({
-        name: 'Empty Owner Demo',
+        name: 'Amit Patel',
         email: EMPTY_EMAIL,
         password: hashedPassword,
         googleId: 'g3-empty',
         role: 'owner',
         profileCompleted: true,
-        phoneNumber: '9876543212',
+        phoneNumber: '7709876543',
         city: 'Pune',
       });
       console.log(`Created user ${EMPTY_EMAIL}`);
@@ -530,7 +530,7 @@ const seed = async () => {
 
     console.log(`\nSeeded ${properties.length} properties for ${EMPTY_EMAIL} (${owner.name})`);
     console.log(`  Flats: ${counts.flat} | Shops: ${counts.shop} | Farmhouses: ${counts.farmhouse}`);
-    console.log('\nLogin: empty@example.com / password: 123456');
+    console.log('\nLogin: amit.patel@gmail.com / password: 123456');
     process.exit(0);
   } catch (error) {
     console.error('Seed failed:', error.message);

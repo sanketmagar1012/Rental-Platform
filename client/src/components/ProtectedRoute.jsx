@@ -18,9 +18,6 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (!user.profileCompleted) {
-    return <Navigate to="/complete-profile" replace />;
-  }
 
   return children;
 };

@@ -16,3 +16,8 @@ export const createProperty = async (formData) => {
   });
   return response.data;
 };
+
+export const deleteProperty = async (id) => {
+  const response = await axios.delete(`/properties/${id}`);
+  return response.data;
+};

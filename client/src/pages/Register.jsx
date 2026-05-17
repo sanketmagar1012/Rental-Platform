@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { register } from '../services/authService';
 
 const Register = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'user' });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '', phoneNumber: '', role: 'user' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -69,6 +69,11 @@ const Register = () => {
           <div>
              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
              <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full border border-gray-300 rounded px-3 py-2 outline-none focus:border-mb-red" />
+          </div>
+
+          <div>
+             <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+             <input type="tel" name="phoneNumber" required value={formData.phoneNumber} onChange={handleChange} pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" className="w-full border border-gray-300 rounded px-3 py-2 outline-none focus:border-mb-red" />
           </div>
 
           <div>

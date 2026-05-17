@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { getProperties } from '../services/propertyService';
+import { getProperties, deleteProperty } from '../services/propertyService';
 import PropertyCard from '../components/PropertyCard';
 import { PlusCircle } from 'lucide-react';
 
@@ -25,6 +25,18 @@ const MyProperties = () => {
        fetchMyProps();
     }
   }, [user]);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this property?')) {
+      try {
+        await deleteProperty(id);
+        setProperties(properties.filter(p => p._id !== id));
+      } catch (error) {
+        console.error('Failed to delete property:', error);
+        alert('Failed to delete property. Please try again.');
+      }
+    }
+  };
 
   return (
     <div className="bg-mb-gray min-h-screen py-10">
@@ -59,8 +71,7 @@ const MyProperties = () => {
                <div key={prop._id} className="relative">
                  <PropertyCard property={prop} />
                  <div className="absolute top-4 right-4 flex gap-2">
-                   <button className="bg-white border border-gray-300 text-gray-700 text-xs font-medium px-3 py-1 rounded hover:bg-gray-50">Edit</button>
-                   <button className="bg-white border border-red-300 text-red-600 text-xs font-medium px-3 py-1 rounded hover:bg-red-50">Delete</button>
+                   <button onClick={() => handleDelete(prop._id)} className="bg-white border border-red-300 text-red-600 text-xs font-medium px-3 py-1 rounded hover:bg-red-50 transition-colors">Delete</button>
                  </div>
                </div>
              ))}

@@ -42,8 +42,9 @@ const AddProperty = () => {
 
     try {
       const data = new FormData();
-      const core = ['title', 'description', 'propertyType', 'rent', 'deposit', 'city', 'address'];
+      const core = ['title', 'description', 'propertyType', 'rent', 'deposit', 'address'];
       core.forEach((key) => data.append(key, formData[key]));
+      data.append('city', 'Pune');
 
       const filters = buildFiltersPayload(formData);
       data.append('filters', JSON.stringify(filters));
@@ -129,18 +130,7 @@ const AddProperty = () => {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
-                  <input
-                    type="text"
-                    name="city"
-                    required
-                    value={formData.city}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 rounded px-3 py-2 outline-none focus:border-mb-red"
-                    placeholder="e.g. Pune"
-                  />
-                </div>
+
 
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Local Address</label>
