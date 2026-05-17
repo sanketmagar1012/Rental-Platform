@@ -42,17 +42,6 @@ const PropertyCard = ({ property }) => {
             </Link>
             <p className="text-sm text-gray-500 mt-0.5">{property.title}</p>
           </div>
-          <div className="flex items-center gap-3 text-gray-400">
-            <button type="button" className="hover:text-red-500 transition-colors">
-              <Heart size={18} />
-            </button>
-            <button type="button" className="hover:text-gray-700 transition-colors">
-              <Share2 size={18} />
-            </button>
-            <button type="button" className="hover:text-gray-700 transition-colors">
-              <AlertCircle size={18} />
-            </button>
-          </div>
         </div>
 
         <div className="bg-gray-50 border border-gray-100 rounded p-3 mb-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm mt-2">

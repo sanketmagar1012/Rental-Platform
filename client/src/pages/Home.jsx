@@ -13,18 +13,10 @@ const Home = () => {
           Find your perfect rental home today
         </h1>
         
-        {/* Mock Search Bar for Landing */}
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-white rounded-full p-2 flex shadow-lg items-center">
-            <div className="flex-1 px-4 flex items-center border-r border-gray-200">
-               <span className="text-sm font-medium mr-2">Pune</span>
-               <div className="w-px h-4 bg-gray-300 mx-2"></div>
-               <input type="text" placeholder="Add locality / project / landmark" className="w-full outline-none text-sm" />
-            </div>
-            <button onClick={() => navigate('/login')} className="bg-mb-red text-white rounded-full px-8 py-3 flex items-center gap-2 font-medium hover:bg-red-700 transition-colors">
-              <Search size={18}/> Search
-            </button>
-          </div>
+        <div className="max-w-3xl mx-auto px-4 mt-8">
+          <button onClick={() => navigate('/login')} className="bg-white text-mb-red rounded-full px-10 py-4 font-bold text-lg hover:bg-gray-100 transition-colors shadow-xl">
+            Browse Properties
+          </button>
         </div>
       </div>
 
@@ -37,7 +29,7 @@ const Home = () => {
                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="home" className="w-8 opacity-50"/>
              </div>
              <h3 className="font-medium text-gray-800">Flats for Rent</h3>
-             <p className="text-sm text-gray-500 mt-2">16,000+ options available</p>
+             <p className="text-sm text-gray-500 mt-2">Find your ideal home easily</p>
            </div>
            
            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center cursor-pointer" onClick={() => navigate('/login')}>
@@ -61,7 +53,7 @@ const Home = () => {
                <span className="text-2xl font-bold text-yellow-500">₹</span>
              </div>
              <h3 className="font-medium text-gray-800">Post Property Free</h3>
-             <p className="text-sm text-gray-500 mt-2">Sell or rent your property</p>
+             <p className="text-sm text-gray-500 mt-2">Rent out your property</p>
            </div>
         </div>
       </div>

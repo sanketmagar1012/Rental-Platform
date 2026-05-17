@@ -89,22 +89,6 @@ const Properties = () => {
       <div className="bg-mb-red text-white sticky top-16 z-40 shadow-md">
         <div className="container mx-auto px-4 h-14 flex items-center gap-3 overflow-x-auto no-scrollbar">
           <div className="bg-white text-mb-text flex items-center rounded-full px-4 py-1.5 text-sm shrink-0">
-            <span className="font-medium mr-2">Rent</span>
-            <ChevronDown size={14} />
-          </div>
-
-          <div className="bg-white text-mb-text flex items-center rounded-full px-4 py-1.5 text-sm shrink-0">
-            <input
-              type="text"
-              name="city"
-              value={filters.city || ''}
-              onChange={handleBarFilterChange}
-              placeholder="City e.g. Pune"
-              className="outline-none w-28 bg-transparent placeholder-gray-400"
-            />
-          </div>
-
-          <div className="bg-white text-mb-text flex items-center rounded-full px-4 py-1.5 text-sm shrink-0">
             <select
               name="propertyType"
               value={filters.propertyType}
@@ -216,24 +200,6 @@ const Properties = () => {
           )}
         </div>
 
-        <div className="w-full lg:w-72 shrink-0">
-          <div className="sticky top-32 space-y-6">
-            <div className="bg-[#fff9e6] p-6 rounded-lg border border-yellow-200 text-center">
-              <h3 className="text-xl font-light text-gray-800 mb-2">
-                Sell/Rent your Property with us for{' '}
-                <span className="text-green-600 font-bold">Free</span>
-              </h3>
-              <p className="text-sm text-gray-500 mb-6">Find Buyers & Tenants easily</p>
-              <button
-                type="button"
-                onClick={() => navigate('/add-property')}
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-full w-full transition-colors"
-              >
-                Post Property
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

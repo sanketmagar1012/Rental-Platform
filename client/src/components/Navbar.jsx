@@ -23,9 +23,6 @@ const Navbar = () => {
           </Link>
           
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-mb-text">
-            <Link to="/properties" className="hover:text-mb-red transition-colors flex items-center gap-1">Rent <ChevronDown size={14}/></Link>
-            <span className="hover:text-mb-red transition-colors cursor-pointer flex items-center gap-1">Buy <ChevronDown size={14}/></span>
-            <span className="hover:text-mb-red transition-colors cursor-pointer flex items-center gap-1">Sell <ChevronDown size={14}/></span>
           </div>
         </div>
 
