@@ -47,16 +47,6 @@ const PropertyFiltersPanel = ({ open, filters, onChange, onApply, onClear, onClo
       </div>
 
       <div className="p-6 space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
-          <input
-            type="text"
-            value={filters.city}
-            onChange={(e) => set('city', e.target.value)}
-            placeholder="e.g. Pune"
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-mb-red"
-          />
-        </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
