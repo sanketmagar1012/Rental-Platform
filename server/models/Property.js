@@ -30,6 +30,14 @@ const PropertySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  latitude: {
+    type: Number,
+    required: false
+  },
+  longitude: {
+    type: Number,
+    required: false
+  },
   amenities: [String],
   images: [String],
   ownerId: {
