@@ -322,6 +322,8 @@ Stores:
 | MongoDB    | Main database   |
 | Mongoose   | ODM for MongoDB |
 
+The backend reads its connection string from `MONGO_URI` in the server environment and waits for MongoDB to connect before listening for requests. For `mongodb+srv://` connection strings, Node.js must be able to resolve the Atlas SRV record. If Node.js uses a local DNS resolver that refuses the lookup, set `MONGODB_DNS_SERVERS=1.1.1.1,1.0.0.1` in the server environment to use those DNS servers directly.
+
 ---
 
 ## Maps & Location
