@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getProperties, deleteProperty } from '../services/propertyService';
 import PropertyCard from '../components/PropertyCard';
-import { PlusCircle } from 'lucide-react';
+import { Pencil, PlusCircle } from 'lucide-react';
 
 const MyProperties = () => {
   const { user } = useContext(AuthContext);
@@ -70,7 +70,13 @@ const MyProperties = () => {
              {properties.map(prop => (
                <div key={prop._id} className="relative">
                  <PropertyCard property={prop} />
-                 <div className="absolute top-4 right-4 flex gap-2">
+                 <div className="absolute top-4 right-4 z-20 flex gap-2">
+                   <Link
+                     to={`/edit-property/${prop._id}`}
+                     className="glass-box border border-[#38bdf8]/40 text-[#38bdf8] text-xs font-medium px-3 py-1 rounded hover:bg-[#38bdf8]/20 transition-colors flex items-center gap-1"
+                   >
+                     <Pencil size={14} /> Edit
+                   </Link>
                    <button onClick={() => handleDelete(prop._id)} className="glass-box border border-red-400/40 text-red-300 text-xs font-medium px-3 py-1 rounded hover:bg-red-500/20 transition-colors">Delete</button>
                  </div>
                </div>

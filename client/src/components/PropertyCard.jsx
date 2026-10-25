@@ -1,6 +1,4 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Share2, AlertCircle } from 'lucide-react';
 
 const typeLabel = { flat: 'Flat', shop: 'Shop', farmhouse: 'Farmhouse' };
 
@@ -9,10 +7,13 @@ const PropertyCard = ({ property }) => {
   const isFlat = property.propertyType === 'flat';
   const isShop = property.propertyType === 'shop';
   const isFarmhouse = property.propertyType === 'farmhouse';
+  const location = [property.address, property.city]
+    .filter((part, index, parts) => part && (index === 0 || !parts[0].toLowerCase().includes(part.toLowerCase())))
+    .join(', ');
 
   const headline = isFlat
-    ? `${f.bhk || ''} Flat for Rent in ${property.address}, ${property.city}`
-    : `${typeLabel[property.propertyType] || 'Property'} for Rent in ${property.address}, ${property.city}`;
+    ? `${f.bhk || ''} Flat for Rent in ${location}`
+    : `${typeLabel[property.propertyType] || 'Property'} for Rent in ${location}`;
 
   return (
     <div className="glass-box rounded-lg overflow-hidden flex flex-col md:flex-row hover:shadow-[0_4px_30px_rgba(56,189,248,0.15)] transition-all mb-4 border border-white/20 group">

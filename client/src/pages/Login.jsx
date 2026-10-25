@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { login as loginService } from '../services/authService';
 
-const Login = () => {
+const Login = ({ embedded = false }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -41,8 +41,8 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-transparent min-h-[calc(100vh-64px)] flex flex-col items-center justify-center py-12 px-4">
-      <div className="glass-box rounded-lg max-w-md w-full p-8">
+    <div className={embedded ? 'w-full flex justify-start' : 'bg-transparent min-h-[calc(100vh-64px)] flex flex-col items-center justify-center py-12 px-4'}>
+      <div className={`glass-box rounded-lg max-w-md w-full p-8 ${embedded ? 'bg-slate-800/35 backdrop-blur-md border-white/25 shadow-2xl' : ''}`}>
         
         <h2 className="text-2xl font-bold text-white mb-2 text-center drop-shadow">Login</h2>
         <p className="text-gray-300 text-sm mb-6 text-center">Welcome back to RentSphere</p>

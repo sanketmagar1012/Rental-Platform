@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { User, LogOut, ChevronDown, Menu } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -57,7 +58,7 @@ const Navbar = () => {
                  </Link>
               )}
             </div>
-          ) : (
+          ) : pathname !== '/' ? (
             <>
               <Link to="/login" className="text-sm font-medium text-white hover:text-[#38bdf8] transition-colors flex items-center gap-1">
                 Login <ChevronDown size={14}/>
@@ -66,7 +67,7 @@ const Navbar = () => {
                  Post Property <span className="bg-[#0f172a] text-[#38bdf8] text-xs px-1 rounded ml-1 uppercase border border-[#38bdf8]">Free</span>
               </Link>
             </>
-          )}
+          ) : null}
           
           <button className="md:hidden text-white hover:text-[#38bdf8]">
             <Menu size={24} />

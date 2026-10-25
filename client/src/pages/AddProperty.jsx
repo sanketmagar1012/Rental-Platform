@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createProperty } from '../services/propertyService';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createProperty, getProperty, updateProperty } from '../services/propertyService';
 import CheckboxGroup from '../components/CheckboxGroup';
 import {
   PROPERTY_TYPES,
@@ -14,7 +14,10 @@ import {
 
 const AddProperty = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const isEditing = Boolean(id);
   const [loading, setLoading] = useState(false);
+  const [loadingProperty, setLoadingProperty] = useState(isEditing);
   const [formData, setFormData] = useState(() => {
     const defaultState = getDefaultFormState('flat');
     return {
@@ -29,9 +32,35 @@ const AddProperty = () => {
   const markerInstanceRef = useRef(null);
 
   useEffect(() => {
-    if (!window.L) return;
+    if (!id) return;
+
+    const fetchProperty = async () => {
+      try {
+        const { data: property } = await getProperty(id);
+        setFormData({
+          ...getDefaultFormState(property.propertyType),
+          ...property,
+          ...(property.filters || {}),
+          amenities: property.amenities || [],
+          latitude: property.latitude || 18.5204,
+          longitude: property.longitude || 73.8567,
+        });
+      } catch (error) {
+        console.error('Failed to load property for editing:', error);
+        alert(error.response?.data?.message || 'Failed to load property. Please try again.');
+        navigate('/my-properties');
+      } finally {
+        setLoadingProperty(false);
+      }
+    };
+
+    fetchProperty();
+  }, [id, navigate]);
+
+  useEffect(() => {
+    if (loadingProperty || !window.L) return;
     const L = window.L;
-    const center = [formData.latitude || 18.5204, formData.longitude || 73.8567];
+    const center = [18.5204, 73.8567];
 
     if (mapInstanceRef.current) {
       return;
@@ -108,7 +137,15 @@ const AddProperty = () => {
         markerInstanceRef.current = null;
       }
     };
-  }, []);
+  }, [loadingProperty]);
+
+  useEffect(() => {
+    if (!mapInstanceRef.current || !markerInstanceRef.current) return;
+
+    const coordinates = [formData.latitude, formData.longitude];
+    markerInstanceRef.current.setLatLng(coordinates);
+    mapInstanceRef.current.setView(coordinates, 13);
+  }, [formData.latitude, formData.longitude]);
 
   const handleLocateMe = () => {
     if (navigator.geolocation) {
@@ -180,8 +217,13 @@ const AddProperty = () => {
         data.append('images', files[i]);
       }
 
-      await createProperty(data);
-      alert('Property Added Successfully!');
+      if (isEditing) {
+        await updateProperty(id, data);
+        alert('Property Updated Successfully!');
+      } else {
+        await createProperty(data);
+        alert('Property Added Successfully!');
+      }
       navigate('/my-properties');
     } catch (error) {
       console.error(error);
@@ -199,12 +241,20 @@ const AddProperty = () => {
     <div className="bg-transparent min-h-screen py-10">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="glass-box rounded-xl border border-white/20 p-8">
-          <h1 className="text-2xl font-bold text-white mb-2 drop-shadow">Post New Property</h1>
+          <h1 className="text-2xl font-bold text-white mb-2 drop-shadow">
+            {isEditing ? 'Edit Property' : 'Post New Property'}
+          </h1>
           <p className="text-sm text-gray-400 mb-6">
-            Form fields change based on property type — flats, shops, and farmhouses have different options.
+            {isEditing
+              ? 'Update the property details, address, and map location.'
+              : 'Form fields change based on property type — flats, shops, and farmhouses have different options.'}
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+          {loadingProperty ? (
+            <div className="flex justify-center py-20">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#38bdf8]" />
+            </div>
+          ) : <form onSubmit={handleSubmit} className="space-y-8">
             <section className="space-y-6">
               <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">Basic details</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -465,10 +515,10 @@ const AddProperty = () => {
                 disabled={loading}
                 className={`px-8 py-2 rounded-full font-bold text-[#0f172a] transition-all shadow-[0_0_15px_rgba(56,189,248,0.4)] ${loading ? 'bg-sky-300 opacity-60' : 'bg-[#38bdf8] hover:bg-sky-400'}`}
               >
-                {loading ? 'Posting...' : 'Post Property'}
+                {loading ? (isEditing ? 'Saving...' : 'Posting...') : (isEditing ? 'Save Changes' : 'Post Property')}
               </button>
             </div>
-          </form>
+          </form>}
         </div>
       </div>
     </div>
